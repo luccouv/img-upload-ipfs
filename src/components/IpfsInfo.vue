@@ -57,7 +57,7 @@
                 //add a file to ipfs
                 let fileAdded = await ipfs.add(this.file)
                     .then((hashedImg) => {
-                        //Get the hash returned by ipfs
+                        //Get img hash returned by ipfs
                         this.hash = hashedImg[0].hash
                         //Create the url of our file
                         this.url='https://ipfs.io/ipfs/' + hashedImg[0].hash
