@@ -1,40 +1,50 @@
 # IPFS Vue app
 
-A minimal demonstration of how to use `js-ipfs` with `Vue`.
+Installer le prototype
 
-![screenshot of the js ipfs node id info](./src/assets/ipfs-vue-screenshot.png)
+Le prototype est disponible ici: https://github.com/luccouv/img-upload-ipfs 
 
-This project was bootstrapped with [Vue CLI](https://cli.vuejs.org/).
 
-## Project setup
+Installer
 
-```bash
 npm install
-```
 
-### Compiles and hot-reloads for development
 
-```bash
+Lancer
+
 npm run serve
-```
 
-### Compiles and minifies for production
+Le noeud ipfs se lance automatiquement (pas besoin de le lancer depuis un terminal)
 
-```bash
-npm run build
-```
 
-### Run your tests
+Utilisation
 
-```bash
-npm run test
-```
+Une fois la connexion à IPFS établie vous arrivez sur une page comme ça : 
 
-### Lints and fixes files
 
-```bash
-npm run lint
-```
+Vous pouvez upload une image et en cliquant sur " Upload to IPFS ", l'image sera postée sur IPFS et trouvable sur : 
+
+https://ipfs.io/ipfs/ votre-hash-d'image
+
+Le hash de l'image que IPFS nous renvoi est affiché dans les logs de votre navigateur. 
+
+L'URL vers l'image s'affiche automatiquement. 
+
+
+Indications :
+
+Dans le projet : 
+
+./plugins/vue-ipfs.js : sert à créer un noeud ipfs (importé ensuite dans main.js)
+
+./components/IpfsInfo.vue : contient toute la partie d'appels et ajouts à ipfs
+
+
+Objectif pour Share2Gether
+
+Pour Share2Gether, l'objectif sera de récupérer les hash des images ajoutées par nos utilisateurs et de les stocker avec les autres informations des groupes/événements dans la blockchain. 
+
+On pourra ensuite récupérer nos images en mettant pour source les liens ipfs comme ci-dessus.
 
 ### Customize configuration
 
