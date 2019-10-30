@@ -6,6 +6,7 @@
         <h2>Agent version: {{ agentVersion }}</h2>
         <input type="file" id="inputElement" @change="captureFile"/>
         <button @click="uploadToIPFS">Upload to IPFS</button>
+        <div><a v-if="urlExist">{{url}}</a></div>
     </div>
 </template>
 
@@ -19,6 +20,8 @@
                 agentVersion: "",
                 buffer: '',
                 hash: '',
+                url: '',
+                urlExist: false
             };
         },
         mounted: function() {
@@ -45,29 +48,20 @@
            * convert it to ArrayBuffer.
            */
             captureFile(file) {
-                /*const reader = new FileReader();
-                if (typeof file !== 'undefined') {
-                    reader.readAsArrayBuffer(file.target.files[0]);
-                    reader.onloadend = async () => {
-                        this.buffer = await this.convertToBuffer(reader.result);
-                        console.log('File captured' )
-                    };
-                } else this.buffer = '';*/
                 this.file = event.target.files[0]
-            },
-            /**
-             * converts ArrayBuffer to
-             * Buffer for IPFS upload.
-             */
-            async convertToBuffer(reader) {
-                return Buffer.from(reader);
             },
 
             async uploadToIPFS(){
+                //Get ipfs instance
                 let ipfs = await this.$ipfs
+                //add a file to ipfs
                 let fileAdded = await ipfs.add(this.file)
                     .then((hashedImg) => {
+                        //Get the hash returned by ipfs
                         this.hash = hashedImg[0].hash
+                        //Create the url of our file
+                        this.url='https://ipfs.io/ipfs/' + hashedImg[0].hash
+                        this.urlExist = true
                     })
                 console.log(this.hash)
                 console.log(fileAdded)
